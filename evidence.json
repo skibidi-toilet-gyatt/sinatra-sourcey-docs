@@ -27,8 +27,8 @@
     "configuration/docs/configuration/templates.html"
   ],
   "observations": [
-    "Ecosystem: Ruby — not represented by live or accepted Sourcey docs on board",
-    "Library: Sinatra — maintained OSS, MIT license, 15+ public APIs documented",
+    "Ecosystem: Ruby \u2014 not represented by live or accepted Sourcey docs on board",
+    "Library: Sinatra \u2014 maintained OSS, MIT license, 15+ public APIs documented",
     "Sourcey version: 3.6.5",
     "Runx version: runx-cli 0.7.2 (>= 0.6.6)",
     "Pages generated: 16 HTML pages covering routing, API reference, middleware, configuration",
@@ -36,5 +36,6 @@
     "Public URL: https://skibidi-toilet-gyatt.github.io/sinatra-sourcey-docs/",
     "Target ecosystem differs from Go, TypeScript, Python, Rust, C++ already represented"
   ],
-  "gaps": []
+  "gaps": [],
+  "summary": "Sourcey-generated documentation for Sinatra (Ruby web framework). 16 HTML pages covering API reference, routing, middleware, configuration, templates, and more. Ruby ecosystem not previously represented in Sourcey docs bounties on Frantic."
 }
