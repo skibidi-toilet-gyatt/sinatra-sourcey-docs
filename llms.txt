@@ -1,0 +1,33 @@
+# What is Sinatra?
+
+> Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort.
+
+## Overview
+
+- [What is Sinatra?](/overview//docs/overview/): Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort.
+- [Installation](/overview//docs/overview/installation.html): Or add to your Gemfile:
+- [Routing Basics](/overview//docs/overview/routing.html): Route methods Copy get '/' do 'Home' end post '/' do 'Created' end put '/' do 'Updated' end delete '/' do 'Deleted' end patch '/' do 'Patch…
+
+## API Reference
+
+- [HTTP Verb Methods](/api-reference//docs/api/http-verbs.html): Sinatra provides a DSL method for each HTTP verb.
+- [The Request Object](/api-reference//docs/api/request-object.html): The `request` object is an instance of `Sinatra::Request` (subclass of `Rack::Request`).
+- [The Response Object](/api-reference//docs/api/response-object.html): The `response` object is an instance of `Sinatra::Response`.
+- [Built-in Helpers](/api-reference//docs/api/helpers.html): Sinatra provides many built-in helper methods.
+
+## Routes & Handlers
+
+- [Route Conditions](/routes-handlers//docs/routes/conditions.html): User Agent matching Copy get '/foo' , :agent => /Songbird ( \d\.\d )[ \d\/ ]*?/ do "You're using Songbird version #{ params[ :agent ][ 0 ]…
+- [Route Return Values](/routes-handlers//docs/routes/return-values.html): String body Copy get '/' do 'Hello world' end Array body Copy get '/' do [ 'line1' , 'line2' ] end Rack response tuple Copy get '/' do [ 20…
+- [Custom Route Patterns](/routes-handlers//docs/routes/custom-patterns.html): POST params are merged from query string and body:
+
+## Middleware & Filters
+
+- [Before & After Filters](/middleware-filters//docs/middleware/filters.html): Run before matching routes:
+- [Rack Middleware](/middleware-filters//docs/middleware/rack-middleware.html): Middleware is executed in the order it's declared, wrapping the app inside-out.
+
+## Configuration
+
+- [Configuration Settings](/configuration//docs/configuration/settings.html): Built-in settings Copy set :port , 4567 # Server port (default: 4567) set :bind , '0.0.0.0' # Bind address (default: localhost) set :enviro…
+- [Environments](/configuration//docs/configuration/environments.html): Via `RACK_ENV` environment variable:
+- [Templates & Views](/configuration//docs/configuration/templates.html): Sinatra supports ERB, Haml, Slim, and many more.

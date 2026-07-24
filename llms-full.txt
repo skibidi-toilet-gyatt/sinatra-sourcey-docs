@@ -1,0 +1,125 @@
+# What is Sinatra?
+
+Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort.
+
+## Overview
+
+### What is Sinatra?
+
+Path: `/overview//docs/overview/`
+
+Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort.
+
+Sinatra is a DSL for quickly creating web applications in Ruby with minimal effort. Philosophy Sinatra keeps things simple. A single file can contain a complete web application. Hello World Copy require 'sinatra' get '/' do 'Hello, world!' end Key Concepts Routes — HTTP method + URL pattern matched to a block Filters — before/after hooks that run per request Helpers — shared methods available in routes and views Templates — ERB, Haml, Slim, and built-in template engines Sessions — Cookie-based or configurable session stores Error handling — Custom error pages per status code
+
+### Installation
+
+Path: `/overview//docs/overview/installation.html`
+
+Or add to your Gemfile:
+
+Installing Sinatra Copy gem install sinatra Or add to your Gemfile: Copy gem 'sinatra' Requirements Ruby 2.7.0 or newer Rack 2.2 or newer Quick start Create app.rb : Copy require 'sinatra' get '/hello/:name' do "Hello, #{ params[ :name ] } !" end Run: Copy ruby app.rb Visit http://localhost:4567/hello/world
+
+### Routing Basics
+
+Path: `/overview//docs/overview/routing.html`
+
+Route methods Copy get '/' do 'Home' end post '/' do 'Created' end put '/' do 'Updated' end delete '/' do 'Deleted' end patch '/' do 'Patched' end options '/' do 'Options' end link '/' do 'Linked' end unlink '/' do 'Unlinked' end Named parameters Copy get '/hello/:name' do "Hello, #{ params[ :name ] } !" end Splat parameters Copy get '/say/*/to/*' do params[ 'splat' ] # => ["hello", "world"] end Regular expressions Copy get %r{/hello/([ \w ]+)} do "Hello, #{ params[ :captures ]. first } !" end
+
+## API Reference
+
+### HTTP Verb Methods
+
+Path: `/api-reference//docs/api/http-verbs.html`
+
+Sinatra provides a DSL method for each HTTP verb.
+
+Sinatra provides a DSL method for each HTTP verb. get(path, opts={}, &block) Define a GET route. Copy get '/' do 'Hello' end post(path, opts={}, &block) Define a POST route. Copy post '/create' do # create resource end put(path, opts={}, &block) Define a PUT route. Copy put '/update/:id' do # update resource end patch(path, opts={}, &block) Define a PATCH route. Copy patch '/modify/:id' do # partial update end delete(path, opts={}, &block) Define a DELETE route. Copy delete '/remove/:id' do # delete resource end options(path, opts={}, &block) Define an OPTIONS route. Copy options '/resource' do # return allowed methods end link(path, opts={}, &block) Define a LINK route. unlink(path, opts={}, &block) Define an UNLINK route.
+
+### The Request Object
+
+Path: `/api-reference//docs/api/request-object.html`
+
+The `request` object is an instance of `Sinatra::Request` (subclass of `Rack::Request`).
+
+The request object is an instance of Sinatra::Request (subclass of Rack::Request ). params Hash of route parameters, query string parameters, and POST body parameters. Copy get '/:name' do params[ :name ] # route parameter params[ :page ] # query parameter: /foo?page=2 end env The raw Rack environment hash. Copy request. env [ 'HTTP_USER_AGENT' ] scheme Returns the request scheme ( http or https ). secure? Returns true if the request is HTTPS. host Returns the requested hostname. port Returns the requested port number. request_method Returns the HTTP request method as a string. path_info Returns the requested path. fullpath Returns the full request path including query string. Copy request. fullpath # => "/foo?page=1" accept? Check accepted MIME types: Copy request. accept? 'text/html' user_agent Returns the User-Agent header value. referrer Returns the Referer header value. cookies Hash of request cookies. Copy request. cookies [ 'session_id' ] body Returns the request body as an IO object. ip Returns the client IP address. host_with_port Returns hostname and port combined.
+
+### The Response Object
+
+Path: `/api-reference//docs/api/response-object.html`
+
+The `response` object is an instance of `Sinatra::Response`.
+
+The response object is an instance of Sinatra::Response . status(code=200) Set the HTTP status code. Copy get '/' do status 404 'Not found' end headers(hash) Set response headers. Copy get '/' do headers 'X-Custom' => 'value' 'OK' end body(value) Set the response body. content_type(type, opts={}) Set the Content-Type header. Copy get '/data' do content_type :json '{"key": "value"}' end cache_control(*values) Set Cache-Control header. Copy get '/' do cache_control :public , :must_revalidate , max_age: 600 'OK' end expires(amount, *values) Set Expires header and Cache-Control max-age. Copy get '/' do expires 300 , :public 'OK' end etag(value, opts={}) Set the ETag header. last_modified(time) Set the Last-Modified header. redirect(uri, status=302) Redirect to another URL. Copy get '/old' do redirect '/new' end halt(status, body=nil) Immediately stop processing and return a response. Copy get '/' do halt 401 , 'Unauthorized' unless authorized? end not_found(&block) Register a handler for 404 responses. Copy not_found do 'Custom 404 page' end error(code, &block) Register a handler for a specific error status code. Copy error 403 do 'Access denied' end
+
+### Built-in Helpers
+
+Path: `/api-reference//docs/api/helpers.html`
+
+Sinatra provides many built-in helper methods.
+
+Sinatra provides many built-in helper methods. session Hash-like object for session data. Requires session middleware. Copy enable :sessions get '/' do session[ :user_id ] = 1 end flash One-time messages between requests (with sinatra-flash gem). settings Access configuration settings. Copy get '/' do settings. port end mime_type(type) Resolve a file extension to a MIME type. Copy mime_type :json # => "application/json" before(type, &block) Register a before filter. Runs before matching route. Copy before '/admin/*' do authenticate! end after(type, &block) Register an after filter. Runs after matching route. Copy after do logger. info "Request completed" end configure(*environments, &block) Run block only in specific environments. Copy configure :production do set :cache , true end set(setting, value) Set a configuration option. Copy set :port , 4567 set :bind , '0.0.0.0' enable(*settings) Set one or more settings to true. Copy enable :sessions , :logging disable(*settings) Set one or more settings to false. Copy disable :show_exceptions register(extension, &block) Register a Sinatra extension. Copy require 'sinatra/contrib' register Sinatra :: Contrib helpers(*extensions, &block) Define helper methods or register helper modules. Copy helpers do def current_user User . find (session[ :user_id ]) end end set_default_content_type(type) Set default content type for all responses. send_file(path, opts={}) Send a file as the response. Copy get '/download' do send_file '/path/to/file.zip' end attachment(filename=nil) Set response to trigger a file download. Copy get '/report' do attachment 'report.csv' generate_csv end
+
+## Routes & Handlers
+
+### Route Conditions
+
+Path: `/routes-handlers//docs/routes/conditions.html`
+
+User Agent matching Copy get '/foo' , :agent => /Songbird ( \d\.\d )[ \d\/ ]*?/ do "You're using Songbird version #{ params[ :agent ][ 0 ] } " end Host name matching Copy get '/' , :host_name => /^admin \. / do 'Admin area' end Custom conditions Copy set ( :probability ) { | value | condition { rand value } } get '/win' , :probability => 0.1 do "You won!" end Multiple conditions Copy get '/api/:version/*' , :agent => /curl/ , :host_name => /^api \. / do "API request from curl to #{ params[ :version ] } " end
+
+### Route Return Values
+
+Path: `/routes-handlers//docs/routes/return-values.html`
+
+String body Copy get '/' do 'Hello world' end Array body Copy get '/' do [ 'line1' , 'line2' ] end Rack response tuple Copy get '/' do [ 200 , { 'Content-Type' => 'text/plain' }, [ 'Hello' ]] end Streaming responses Copy get '/stream' do stream ( :keep_open ) do | out | out "Hello \n " out "World \n " end end File body Copy get '/' do File . open ( '/path/to/file' ) end
+
+### Custom Route Patterns
+
+Path: `/routes-handlers//docs/routes/custom-patterns.html`
+
+POST params are merged from query string and body:
+
+Mustache/Handlebars-style parameters Copy get '/hello/:name' do | n | "Hello #{ n } " end Optional parameters Copy get '/posts.?:format?' do "Format: #{ params[ :format ] || 'html' } " end Query parameters Copy get '/search' do query = params[ :q ] page = params[ :page ] || 1 "Search: #{ query } , page: #{ page } " end POST body parameters Copy post '/login' do username = params[ :username ] password = params[ :password ] end Query string vs body POST params are merged from query string and body: Copy # POST /login?remember=1 with body user=john&pass=secret # params == {"user"=>"john", "pass"=>"secret", "remember"=>"1"}
+
+## Middleware & Filters
+
+### Before & After Filters
+
+Path: `/middleware-filters//docs/middleware/filters.html`
+
+Run before matching routes:
+
+Before filters Run before matching routes: Copy before do @start_time = Time . now end before '/admin/*' do authenticate! end before '/api/:version' do | ver | @api_version = ver end After filters Run after matching routes: Copy after do duration = Time . now - @start_time logger. info "Request took #{ duration } s" end after '/admin/*' do audit_log (params) end Filter conditions Filters respect the same conditions as routes: Copy before :agent => /curl/ do @api_mode = true end Halting in filters Copy before '/admin/*' do halt 401 , 'Not authorized' unless session[ :admin ] end
+
+### Rack Middleware
+
+Path: `/middleware-filters//docs/middleware/rack-middleware.html`
+
+Middleware is executed in the order it's declared, wrapping the app inside-out.
+
+Using Rack middleware Copy require 'sinatra/base' class MyApp Sinatra::Base use Rack :: Auth :: Basic do | username , password | username == 'admin' && password == 'secret' end get '/' do 'Authenticated!' end end Common middleware Copy use Rack :: Protection use Rack :: Deflater use Rack :: Session :: Cookie , key: 'myapp.session' use Rack :: CommonLogger use Rack :: ShowExceptions if development? Custom middleware Copy class RequestTimer def initialize ( app ) @app = app end def call ( env ) start = Time . now status, headers, body = @app . call (env) duration = Time . now - start headers[ 'X-Runtime' ] = duration. to_s [status, headers, body] end end class MyApp Sinatra::Base use RequestTimer end Middleware order Middleware is executed in the order it's declared, wrapping the app inside-out.
+
+## Configuration
+
+### Configuration Settings
+
+Path: `/configuration//docs/configuration/settings.html`
+
+Built-in settings Copy set :port , 4567 # Server port (default: 4567) set :bind , '0.0.0.0' # Bind address (default: localhost) set :environment , :production # Environment (default: development) set :views , './views' # Views directory set :public_folder , './public' # Static files directory set :logging , true # Enable logging set :show_exceptions , false # Show exceptions in browser set :dump_errors , true # Dump errors to stderr set :raise_errors , false # Raise errors (for testing) set :run , true # Run the server set :server , 'puma' # Server backend set :sessions , true # Enable cookie-based sessions set :session_secret , 'secret' # Session secret key set :protection , true # Built-in protection set :method_override , true # Support PUT/DELETE via _method param Environment-specific settings Copy configure :development do set :show_exceptions , true end configure :production do set :cache_enabled , true set :logging , true end configure :test do set :raise_errors , true set :dump_errors , false end Custom settings Copy set :title , 'My App' set :admin_emails , [ 'admin@example.com' ] set ( :max_login_attempts ) { 5 }
+
+### Environments
+
+Path: `/configuration//docs/configuration/environments.html`
+
+Via `RACK_ENV` environment variable:
+
+Built-in environments development — default, full error pages production — optimized, minimal error output test — used by test suites Checking environment Copy development? # => true in development production? # => true in production test? # => true in test Setting environment Via RACK_ENV environment variable: Copy RACK_ENV = production ruby app.rb Or in code: Copy set :environment , :production Environment-aware behavior Copy set :show_exceptions , development? set :logging , production? before do if development? headers 'X-Runtime' => " #{ Time . now - @start } s" end end
+
+### Templates & Views
+
+Path: `/configuration//docs/configuration/templates.html`
+
+Sinatra supports ERB, Haml, Slim, and many more.
+
+Built-in template engines Sinatra supports ERB, Haml, Slim, and many more. Copy get '/' do erb :index end get '/haml' do haml :template end get '/slim' do slim :template end Inline templates Copy get '/' do haml :index end __END__ @@ index % h1 Hello World Template options Copy set :erb , layout: :my_layout set :haml , format: :html5 Layouts Copy # Uses views/layout.erb by default get '/' do erb :content , layout: :custom_layout end Partial templates Copy get '/' do erb :index , layout: true end File: views/index.erb Copy Welcome
