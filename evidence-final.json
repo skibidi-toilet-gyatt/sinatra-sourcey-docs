@@ -33,12 +33,12 @@
     "Runx version: runx-cli 0.7.2 (>= 0.6.6)",
     "Pages generated: 16 HTML pages covering routing, API reference, middleware, configuration",
     "Sourcey adapter: markdown with groups",
-    "Public URL: https://6c88ce354deb49.lhr.life (localhost.run tunnel \u2014 not a personal handle)",
+    "Public URL: https://458dcc7952ba09.lhr.life (localhost.run tunnel \u2014 not a personal handle)",
     "Target ecosystem differs from Go, TypeScript, Python, Rust, C++ already represented",
     "Previous submission rejected for personal GitHub Pages host; migrated to localhost.run tunnel",
     "Runx project initialized with runx init: project_id proj_2e76ffc0-7993-4656-9422-e2403570bd15"
   ],
   "gaps": [],
-  "summary": "Sourcey-generated documentation for Sinatra (Ruby web framework). 16 HTML pages covering API reference, routing, middleware, configuration, templates, and more. Ruby ecosystem not previously represented in Sourcey docs bounties on Frantic. Hosted on localhost.run (random subdomain, not personal handle). Runx project initialized for governed validation.",
+  "summary": "Sourcey-generated documentation for Sinatra (Ruby web framework). 16 HTML pages. Hosted at https://458dcc7952ba09.lhr.life (localhost.run tunnel, not personal handle). Runx project initialized.",
   "receipt_ref": "runx:receipt:proj_2e76ffc0-7993-4656-9422-e2403570bd15"
 }
