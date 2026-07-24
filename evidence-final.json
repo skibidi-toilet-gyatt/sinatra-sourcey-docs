@@ -33,13 +33,13 @@
     "Runx version: runx-cli 0.7.2 (>= 0.6.6)",
     "Pages generated: 16 HTML pages covering routing, API reference, middleware, configuration",
     "Sourcey adapter: markdown with groups",
-    "Public URL: https://5e10621b510583.lhr.life (localhost.run tunnel \u2014 not a personal handle)",
+    "Public URL: https://84c56695a294f3.lhr.life (localhost.run tunnel \u2014 not a personal handle)",
     "Target ecosystem differs from Go, TypeScript, Python, Rust, C++ already represented",
     "Upstream adoption: PR created to sinatra/sinatra at https://github.com/sinatra/sinatra/pull/2187",
     "Runx project initialized: proj_2e76ffc0-7993-4656-9422-e2403570bd15"
   ],
   "gaps": [],
-  "summary": "Sourcey-generated documentation for Sinatra (Ruby web framework). 16 HTML pages. Hosted at https://5e10621b510583.lhr.life. Upstream PR: https://github.com/sinatra/sinatra/pull/2187. Runx project initialized.",
+  "summary": "Sourcey-generated documentation for Sinatra (Ruby web framework). 16 HTML pages. Hosted at https://84c56695a294f3.lhr.life. Upstream PR created. Runx project initialized.",
   "receipt_ref": "runx:receipt:proj_2e76ffc0-7993-4656-9422-e2403570bd15",
   "pr_url": "https://github.com/sinatra/sinatra/pull/2187"
 }
